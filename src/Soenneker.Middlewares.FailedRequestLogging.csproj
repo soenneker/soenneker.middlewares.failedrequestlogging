@@ -47,7 +47,7 @@
     <ItemGroup>
       <PackageReference Include="Soenneker.Constants.Apis" Version="4.0.6" />
       <PackageReference Include="Soenneker.Extensions.Dictionaries.IHeader" Version="4.0.6" />
-      <PackageReference Include="Soenneker.Extensions.HttpRequests" Version="4.0.12" />
+      <PackageReference Include="Soenneker.Extensions.HttpRequests" Version="4.0.13" />
       <PackageReference Include="Soenneker.Extensions.ValueTask" Version="4.0.103" />
     </ItemGroup>
 </Project>
