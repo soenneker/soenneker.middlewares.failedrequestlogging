@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Soenneker.Middlewares.FailedRequestLogging.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Middlewares.FailedRequestLogging\Soenneker.Middlewares.FailedRequestLogging.csproj" />
     </ItemGroup>
 
     <ItemGroup>
