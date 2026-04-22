@@ -1,16 +1,15 @@
-﻿using Soenneker.Tests.FixturedUnit;
-using Xunit;
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Middlewares.FailedRequestLogging.Tests;
 
-[Collection("Collection")]
-public sealed class FailedRequestLoggingMiddlewareTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public sealed class FailedRequestLoggingMiddlewareTests : HostedUnitTest
 {
-    public FailedRequestLoggingMiddlewareTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public FailedRequestLoggingMiddlewareTests(Host host) : base(host)
     {
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
