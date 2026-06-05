@@ -21,6 +21,11 @@ public sealed class FailedRequestLoggingMiddleware : IFailedRequestLoggingMiddle
         _logger = logger;
     }
 
+    /// <summary>
+    /// Executes the invoke operation.
+    /// </summary>
+    /// <param name="context">The context.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task Invoke(HttpContext context)
     {
         context.Request.EnableBuffering();

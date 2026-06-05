@@ -7,6 +7,11 @@ namespace Soenneker.Middlewares.FailedRequestLogging.Registrars;
 /// </summary>
 public static class FailedRequestLoggingMiddlewareRegistrar
 {
+    /// <summary>
+    /// Executes the use failed request logging operation.
+    /// </summary>
+    /// <param name="builder">The builder.</param>
+    /// <returns>The result of the operation.</returns>
     public static IApplicationBuilder UseFailedRequestLogging(this IApplicationBuilder builder)
     {
         return builder.UseMiddleware<FailedRequestLoggingMiddleware>();
