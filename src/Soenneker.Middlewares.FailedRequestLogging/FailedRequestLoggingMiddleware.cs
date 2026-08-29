@@ -9,7 +9,7 @@ using Soenneker.Constants.Apis;
 
 namespace Soenneker.Middlewares.FailedRequestLogging;
 
-///<inheritdoc cref="IFailedRequestLoggingMiddleware"/>
+/// <inheritdoc cref="IFailedRequestLoggingMiddleware"/>
 public sealed class FailedRequestLoggingMiddleware : IFailedRequestLoggingMiddleware
 {
     private readonly RequestDelegate _next;
