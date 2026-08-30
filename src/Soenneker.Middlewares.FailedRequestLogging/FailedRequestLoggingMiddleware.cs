@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Soenneker.Extensions.Dictionaries.IHeader;
-using Soenneker.Extensions.HttpRequests;
-using Soenneker.Extensions.ValueTask;
+using Soenneker.Constants.Apis;
 using Soenneker.Middlewares.FailedRequestLogging.Abstract;
 using System.Threading.Tasks;
-using Soenneker.Constants.Apis;
 
 namespace Soenneker.Middlewares.FailedRequestLogging;
 
-/// <inheritdoc cref="IFailedRequestLoggingMiddleware"/>
 public sealed class FailedRequestLoggingMiddleware : IFailedRequestLoggingMiddleware
 {
     private readonly RequestDelegate _next;
@@ -21,29 +17,19 @@ public sealed class FailedRequestLoggingMiddleware : IFailedRequestLoggingMiddle
         _logger = logger;
     }
 
-    /// <summary>
-    /// Invokes the failed request logging middleware with the supplied payload.
-    /// </summary>
-    /// <param name="context">HTTP context containing the Authorization header.</param>
-    /// <returns>A task that completes when the callback has finished running.</returns>
     public async Task Invoke(HttpContext context)
     {
-        context.Request.EnableBuffering();
-
         await _next(context);
 
-        if (context.Items.ContainsKey(ApiConstants.ControllerHitFlag))
+        if (context.Items.TryGetValue(ApiConstants.ControllerHitFlag, out object? controllerHit) && controllerHit is true)
             return;
 
         int statusCode = context.Response.StatusCode;
 
         if (statusCode is StatusCodes.Status400BadRequest or StatusCodes.Status404NotFound or StatusCodes.Status405MethodNotAllowed)
         {
-            string headers = context.Request.Headers.ToJsonString();
-            string? body = await context.Request.ReadBody().NoSync();
-
-            _logger.LogWarning("Request {Method} {Path} failed with status code {StatusCode}. Headers: {Headers} Body: {Body}", context.Request.Method,
-                context.Request.Path + context.Request.QueryString, statusCode, headers, body);
+            _logger.LogWarning("Request {Method} {Path} failed before reaching a controller with status code {StatusCode}. Trace: {TraceIdentifier}",
+                context.Request.Method, context.Request.Path, statusCode, context.TraceIdentifier);
         }
     }
 }
