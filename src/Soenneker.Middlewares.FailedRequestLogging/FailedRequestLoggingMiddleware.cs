@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soenneker.Middlewares.FailedRequestLogging;
 
+/// <inheritdoc cref="IFailedRequestLoggingMiddleware" />
 public sealed class FailedRequestLoggingMiddleware : IFailedRequestLoggingMiddleware
 {
     private readonly RequestDelegate _next;
