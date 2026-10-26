@@ -49,6 +49,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.Constants.Apis" Version="4.0.35" />
+        <PackageReference Include="Soenneker.Constants.Apis" Version="11.0.36" />
     </ItemGroup>
 </Project>
